@@ -1,49 +1,45 @@
-import { Flex, IconButton } from "@chakra-ui/react";
-import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Box, Flex, IconButton } from "@chakra-ui/react";
 import { X, Gear, ListChecks } from "@phosphor-icons/react";
 
-import Clock from "@/components/Clock";
-import Panel from "@/components/Panel";
-import Settings from "@/components/Settings";
-import TaskList from "@/components/TaskList";
-import CustomTooltip from "@/components/CustomTooltip";
+import Clock from "../components/Clock";
+import Panel from "../components/Panel";
+import Settings from "../components/Settings";
+import TaskList from "../components/TaskList";
+import CustomTooltip from "../components/CustomTooltip";
 
 type AppView = "clock" | "settings" | "task-list";
 
-const ASIDE_WIDTH = "70dvw";
+const ASIDE_WIDTH = "70%";
 
-export default function Home() {
+export default function Homepage() {
   const [activeView, setActiveView] = useState<AppView>("clock");
-  const [hiddenView, setHiddenView] = useState<Exclude<AppView, "clock">>("settings");
+  const [hiddenView, setHiddenView] =
+    useState<Exclude<AppView, "clock"> | null>(null);
 
   let mainViewLeft = "0px";
 
-  if (activeView === "settings") mainViewLeft = ASIDE_WIDTH;
-  else if (activeView === "task-list") mainViewLeft = `-${ASIDE_WIDTH}`;
+  if (activeView === "settings") mainViewLeft = `calc(${ASIDE_WIDTH} / 2)`;
+  else if (activeView === "task-list") mainViewLeft = `calc(-${ASIDE_WIDTH} / 2)`;
 
+  
   const changeView = (newView: AppView) => {
-    if (newView !== "task-list")
-      setHiddenView("task-list");
-    else
-      setHiddenView("settings")
-    
     setActiveView(newView);
+
+    if (newView === "clock") {
+      setTimeout(() => setHiddenView(null), 1000);
+    } else {
+      setHiddenView(newView === "settings" ? "task-list" : "settings");
+    }
   };
 
   return (
-    <>
-      <Head>
-        <title>Pomodoro timer</title>
-        <meta name="description" content="A minimalistic Pomodoro timer app" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Flex overflowX="hidden" bg="primary.500">
+    <Box overflowX="hidden" w="100%" h="100%">
+      <Flex position="relative" w="200%" h="100%">
         <Panel
           as="aside"
-          w={ASIDE_WIDTH}
-          hidden={activeView === "clock"}
+          w={`calc(${ASIDE_WIDTH} / 2)`}
+          hidden={hiddenView === "settings"}
           bg="bg.500"
         >
           <Settings />
@@ -62,9 +58,9 @@ export default function Home() {
         <Panel
           bg="bg.800"
           as="main"
-          w="100dvw"
+          w="50%"
           zIndex={1}
-          transition="left 1s"
+          transition="left 1s ease"
           left={mainViewLeft}
         >
           <Clock />
@@ -91,9 +87,9 @@ export default function Home() {
         </Panel>
         <Panel
           as="aside"
-          left={`calc(100dvw - ${ASIDE_WIDTH})`}
-          w={ASIDE_WIDTH}
-          hidden={activeView === "clock"}
+          left={`calc(50% - ${ASIDE_WIDTH} / 2)`}
+          w={`calc(${ASIDE_WIDTH} / 2)`}
+          hidden={hiddenView === "task-list"}
           bg="bg.500"
         >
           <CustomTooltip label="Close task list">
@@ -110,6 +106,6 @@ export default function Home() {
           <TaskList />
         </Panel>
       </Flex>
-    </>
+    </Box>
   );
 }

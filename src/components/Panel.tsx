@@ -8,7 +8,7 @@ interface PanelProps {
 
 function Panel({ children, hidden = false, ...props }: PanelProps & FlexProps) {
   const content = (
-    <Flex flexDir="column" position="absolute" top="0px" h="100dvh" {...props}>
+    <Flex flexDir="column" position="absolute" top="0px" h="100%" {...props}>
       {children}
     </Flex>
   );
