@@ -4,8 +4,30 @@ import ClockHandle from "./ClockHandle";
 import ClockNumber from "./ClockNumber";
 import ClockCircle from "./ClockCircle";
 import ClockArc from "./ClockArc";
+import { useEffect, useState } from "react";
 
-function Clock() {
+interface ClockColors {
+  outerCircle: string;
+  hourHandle: string;
+  minuteHandle: string;
+  secondHandle: string;
+  numberColor: string;
+}
+
+interface ClockProps {
+  startAt: Date;
+  colors?: Partial<ClockColors>;
+}
+
+// Built the SVG in Inkscape and imported it here as custom component
+function Clock({ startAt, colors }: ClockProps) {
+  const [time, setTime] = useState(startAt || new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <chakra.svg
       py={4}
@@ -15,10 +37,11 @@ function Clock() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <ClockCircle />
-      <ClockArc />
-      <ClockArc />
-      <ClockHandle type="hour" value={1} />
-      <ClockHandle type="minute" value={30} />
+      {/* <ClockArc />
+      <ClockArc /> */}
+      <ClockHandle type="hour" time={time} color="cyan" />
+      <ClockHandle type="minute" time={time} color="lightpurple" />
+      <ClockHandle type="second" time={time} color="red" />
       {Array(12)
         .fill(0)
         .map((_, i) => (
