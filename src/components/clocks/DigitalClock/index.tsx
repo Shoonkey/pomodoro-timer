@@ -18,7 +18,7 @@ function DigitalClock({ startAt }: DigitalClockProps) {
   const ss = seconds < 10 ? "0" + seconds : seconds;
 
   return (
-    <Text mx="auto" fontSize="72px" fontWeight="bold" color="#9CFCFC">
+    <Text mx="auto" fontSize="72px" fontWeight="bold" color="#DD403A">
       {hh}:{mm}:{ss}
     </Text>
   )
