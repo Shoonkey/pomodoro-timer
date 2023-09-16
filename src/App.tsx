@@ -1,11 +1,27 @@
-import { Box } from "@chakra-ui/react";
+import { Box, BoxProps } from "@chakra-ui/react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Homepage from "./pages/Homepage";
 
-function App() {
+interface AppProps {
+  basename?: string;
+  containerProps: BoxProps;
+}
+
+function App({ basename = "/", containerProps }: AppProps) {
+  const router = createBrowserRouter(
+    [
+      {
+        path: "/",
+        Component: Homepage,
+      },
+    ],
+    { basename }
+  );
+
   return (
-    <Box w="100dvw" h="100dvh">
-      <Homepage />
+    <Box {...containerProps}>
+      <RouterProvider router={router} />
     </Box>
   );
 }

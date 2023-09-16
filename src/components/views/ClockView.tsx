@@ -12,14 +12,11 @@ function ClockView({ changeView }: ViewProps) {
   const [paused, setPaused] = useState(false);
 
   return (
-    <>
+    <Flex flexDir="column" w="100%" h="100%">
       <AnalogClock startAt={now} />
       <DigitalClock startAt={now} />
       <Flex mx="auto">
-        <CustomTooltip
-          label={paused ? "Resume" : "Pause"}
-          placement="top"
-          >
+        <CustomTooltip label={paused ? "Resume" : "Pause"} placement="top">
           <IconButton
             variant="ghost"
             icon={paused ? <Play size={32} /> : <Pause size={32} />}
@@ -48,7 +45,7 @@ function ClockView({ changeView }: ViewProps) {
           />
         </CustomTooltip>
       </Flex>
-    </>
+    </Flex>
   );
 }
 
