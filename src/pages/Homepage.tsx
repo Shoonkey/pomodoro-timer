@@ -1,28 +1,29 @@
 import { useState } from "react";
 import { Box, Flex, IconButton } from "@chakra-ui/react";
-import { X, Gear, ListChecks } from "@phosphor-icons/react";
+import { X } from "@phosphor-icons/react";
 
-import Clock from "../components/Clock";
 import Panel from "../components/Panel";
-import Settings from "../components/Settings";
-import TaskList from "../components/TaskList";
 import CustomTooltip from "../components/CustomTooltip";
-
-type AppView = "clock" | "settings" | "task-list";
+import ClockView from "../components/views/ClockView";
+import AppView from "../components/views/AppView";
+import SettingsView from "../components/views/SettingsView";
+import TaskListView from "../components/views/TaskListView";
 
 const ASIDE_WIDTH = "70%";
 
 export default function Homepage() {
   const [activeView, setActiveView] = useState<AppView>("clock");
-  const [hiddenView, setHiddenView] =
-    useState<Exclude<AppView, "clock"> | null>(null);
+  const [hiddenView, setHiddenView] = useState<Exclude<
+    AppView,
+    "clock"
+  > | null>(null);
 
   let mainViewLeft = "0px";
 
   if (activeView === "settings") mainViewLeft = `calc(${ASIDE_WIDTH} / 2)`;
-  else if (activeView === "task-list") mainViewLeft = `calc(-${ASIDE_WIDTH} / 2)`;
+  else if (activeView === "task-list")
+    mainViewLeft = `calc(-${ASIDE_WIDTH} / 2)`;
 
-  
   const changeView = (newView: AppView) => {
     setActiveView(newView);
 
@@ -42,7 +43,7 @@ export default function Homepage() {
           hidden={hiddenView === "settings"}
           bg="bg.500"
         >
-          <Settings />
+          <SettingsView />
           <CustomTooltip label="Close settings">
             <IconButton
               position="absolute"
@@ -63,27 +64,7 @@ export default function Homepage() {
           transition="left 1s ease"
           left={mainViewLeft}
         >
-          <Clock />
-          <Flex mx="auto" pb={4} gap={4} color="primary.500">
-            <CustomTooltip label="Open settings">
-              <IconButton
-                aria-label="Open settings"
-                variant="ghost"
-                color="inherit"
-                icon={<Gear size={32} weight="fill" />}
-                onClick={() => changeView("settings")}
-              />
-            </CustomTooltip>
-            <CustomTooltip label="Open task list">
-              <IconButton
-                variant="ghost"
-                color="inherit"
-                aria-label="Open task list"
-                icon={<ListChecks size={32} />}
-                onClick={() => changeView("task-list")}
-              />
-            </CustomTooltip>
-          </Flex>
+          <ClockView changeView={changeView} />
         </Panel>
         <Panel
           as="aside"
@@ -103,7 +84,7 @@ export default function Homepage() {
               onClick={() => changeView("clock")}
             />
           </CustomTooltip>
-          <TaskList />
+          <TaskListView />
         </Panel>
       </Flex>
     </Box>

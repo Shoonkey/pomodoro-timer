@@ -1,8 +1,11 @@
+import { chakra } from "@chakra-ui/react";
+
 interface ClockNumberProps {
   value: number;
+  color: string;
 }
 
-function ClockNumber({ value }: ClockNumberProps) {
+function ClockNumber({ value, color }: ClockNumberProps) {
   let x: string, y: string;
 
   switch (value) {
@@ -60,19 +63,18 @@ function ClockNumber({ value }: ClockNumberProps) {
   }
 
   return (
-    <text
-      style={{
-        fontSize: value % 3 === 0 ? "13.3333px" : "10.6667px",
-        fontWeight: "bold",
-        fontFamily: "Ubuntu",
-        fill: "#ffffff",
-        textAnchor: "middle",
-      }}
+    <chakra.text
+      fontSize={value % 3 === 0 ? "13.3333px" : "10.6667px"}
+      fontWeight={"bold"}
+      fontFamily={"Ubuntu"}
+      fill={color}
+      textAnchor={"middle"}
+      color={color}
       x={x}
       y={y}
     >
       {value}
-    </text>
+    </chakra.text>
   );
 }
 

@@ -1,3 +1,5 @@
+import { chakra } from "@chakra-ui/react";
+
 interface ClockHandleProps {
   type: "hour" | "minute" | "second";
   time: Date;
@@ -16,25 +18,25 @@ function ClockHandle({ type, time, color }: ClockHandleProps) {
 
   const attributes: Record<ClockHandleProps["type"], RectangleData> = {
     hour: {
-      width: "3",
-      height: "30.966885",
-      x: "63.064896",
+      width: "3px",
+      height: "30.966885px",
+      x: "62.064896",
       y: "34.295696",
       ry: "0.99379987"
     },
     minute: {
-      width: "1.8702061",
-      height: "37.45166",
-      x: "61.98394",
+      width: "1.8702061px",
+      height: "37.45166px",
+      x: "62.5",
       y: "26.810919",
       ry: "1.4907528"
     },
     second: {
-      width: "0.5",
-      height: "60",
+      width: "0.5px",
+      height: "60px",
       x: "63.75",
       y: "4",
-      ry: "1.4907528"
+      ry: "1"
     }
   };
 
@@ -53,13 +55,11 @@ function ClockHandle({ type, time, color }: ClockHandleProps) {
   }
 
   return (
-    <rect
+    <chakra.rect
       {...attributes[type]}
-      style={{
-        fill: color,
-        transformOrigin: "center",
-        transform: `rotate(${degrees}deg)`
-      }}
+      fill={color}
+      transformOrigin="center"
+      transform={`rotate(${degrees}deg)`}
     />
   );
 }
