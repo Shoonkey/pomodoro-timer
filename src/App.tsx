@@ -2,6 +2,7 @@ import { ChakraProvider, Flex } from "@chakra-ui/react";
 import {
   RouterProvider,
   createBrowserRouter,
+  createHashRouter,
   redirect,
 } from "react-router-dom";
 
@@ -9,13 +10,15 @@ import HomepageV2 from "./v2/pages/Homepage";
 import themeV2 from "./v2/chakra/theme";
 
 interface AppProps {
-  basename?: string;
-  isSubApp?: boolean;
+  isSubapp?: boolean;
   language?: string;
+  theme?: string;
 }
 
-function App({ basename = "/", isSubApp = false, language="pt-BR" }: AppProps) {
-  const router = createBrowserRouter(
+function App({ isSubapp = false, theme, language }: AppProps) {
+  const routerFactory = isSubapp ? createHashRouter : createBrowserRouter;
+
+  const router = routerFactory(
     [
       {
         path: "/",
@@ -29,15 +32,14 @@ function App({ basename = "/", isSubApp = false, language="pt-BR" }: AppProps) {
           </ChakraProvider>
         ),
       },
-    ],
-    { basename }
+    ]
   );
 
   return (
     <Flex
       flexDir="column"
-      w={isSubApp ? "100%" : "100dvw"}
-      h={isSubApp ? "100%" : "100dvh"}
+      w={isSubapp ? "100%" : "100dvw"}
+      h={isSubapp ? "100%" : "100dvh"}
     >
       <RouterProvider router={router} />
     </Flex>
