@@ -1,14 +1,14 @@
-import { Box, BoxProps } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Homepage from "./pages/Homepage";
 
 interface AppProps {
-  basename?: string;
-  containerProps: BoxProps;
+  basename: string;
+  isSubApp: boolean;
 }
 
-function App({ basename = "/", containerProps }: AppProps) {
+function App({ basename = "/", isSubApp }: AppProps) {
   const router = createBrowserRouter(
     [
       {
@@ -20,7 +20,7 @@ function App({ basename = "/", containerProps }: AppProps) {
   );
 
   return (
-    <Box {...containerProps}>
+    <Box w={isSubApp ? "100%" : "100dvw"} h={isSubApp ? "100%" : "100dvh"}>
       <RouterProvider router={router} />
     </Box>
   );

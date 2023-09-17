@@ -5,11 +5,15 @@ import { ChakraProvider } from "@chakra-ui/react";
 import theme from "./chakra/theme.ts";
 import App from "./App.tsx";
 
-function setupApp(containerId: string) {
+function setupApp(
+  containerId: string,
+  basename: string = "/",
+  isSubApp: boolean = false
+) {
   ReactDOM.createRoot(document.getElementById(containerId)!).render(
     <React.StrictMode>
       <ChakraProvider theme={theme}>
-        <App containerProps={{ w: "100dvw", h: "100dvh" }} />
+        <App basename={basename} isSubApp={isSubApp} />
       </ChakraProvider>
     </React.StrictMode>
   );
