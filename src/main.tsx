@@ -1,3 +1,3 @@
 import setupApp from "./setupApp";
 
-setupApp("root");
+setupApp({ containerId: "root" });
