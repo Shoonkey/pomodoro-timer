@@ -9,8 +9,7 @@ const INTERVALS = {
 };
 
 function Clock() {
-  const { t, i18n } = useTranslation();
-  console.log(i18n.language);
+  const { t } = useTranslation();
 
   const [timeInMS, setTimeInMS] = useState(INTERVALS.WORK);
   const [paused, setPaused] = useState(true);
