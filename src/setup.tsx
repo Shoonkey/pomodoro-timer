@@ -7,7 +7,7 @@ interface AppSetupProps {
   containerId: string;
   isSubapp?: boolean;
   language?: string;
-  theme?: string;
+  theme?: "dark" | "light";
 }
 
 let root: Root;

@@ -1,0 +1,29 @@
+{
+  "appTitle": "Cronômetro Pomodoro",
+  "pages": {
+    "home": {
+      "title": "Página inicial",
+      "timer": {
+        "chillTime": "Hora de relaxar",
+        "workTime": "Hora de trabalhar",
+        "start": "Começar",
+        "resume": "Retomar",
+        "pause": "Pausar"
+      },
+      "taskList": {
+        "title": "Tarefas",
+        "task": {
+          "add": "Adicionar tarefa",
+          "complete": "Completar",
+          "reset": "Reiniciar",
+          "delete": "Deletar"
+        }
+      },
+      "taskModal": {
+        "newTask": "Nova tarefa",
+        "add": "Adicionar",
+        "cancel": "Cancelar"
+      }
+    }
+  }
+}

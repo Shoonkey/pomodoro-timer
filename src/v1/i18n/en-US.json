@@ -1,0 +1,29 @@
+{
+  "appTitle": "Pomodoro timer",
+  "pages": {
+    "home": {
+      "title": "Home",
+      "timer": {
+        "chillTime": "Chill time",
+        "workTime": "Work time",
+        "start": "Start",
+        "resume": "Resume",
+        "pause": "Pause"
+      },
+      "taskList": {
+        "title": "Tasks",
+        "task": {
+          "add": "Add task",
+          "complete": "Complete",
+          "reset": "Reset",
+          "delete": "Delete"
+        }
+      },
+      "taskModal": {
+        "newTask": "New task",
+        "add": "Add",
+        "cancel": "Cancel"
+      }
+    }
+  }
+}
