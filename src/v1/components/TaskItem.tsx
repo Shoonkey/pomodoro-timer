@@ -14,25 +14,34 @@ function TaskItem({ task, onSetComplete, onClickDelete }: TaskProps) {
   const { t } = useTranslation();
 
   return (
-    <Flex alignItems="center" bg="gray.900" pl={4} py={1}>
+    <Flex
+      alignItems="center"
+      bg="gray.900"
+      pl={4}
+      py={1}
+      borderColor="gray.700"
+      borderStyle="solid"
+      borderWidth="1px"
+    >
       <Text
         fontSize="1.25rem"
         textDecor={task.completed ? "line-through" : "none"}
         flexGrow={1}
+        wordBreak="break-word"
       >
         {task.description}
       </Text>
       <Tooltip
         placement="left"
-        label={
-          t(`pages.home.taskList.task.${task.completed ? "reset" : "complete"}`)
-        }
+        label={t(
+          `pages.home.taskList.task.${task.completed ? "reset" : "complete"}`
+        )}
       >
         <IconButton
           onClick={() => onSetComplete(!task.completed)}
-          aria-label={
-            t(`pages.home.taskList.task.${task.completed ? "reset" : "complete"}`)
-          }
+          aria-label={t(
+            `pages.home.taskList.task.${task.completed ? "reset" : "complete"}`
+          )}
           icon={
             <CheckCircle
               size={32}
