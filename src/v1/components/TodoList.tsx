@@ -6,21 +6,27 @@ import {
   Spinner,
   Tooltip,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Plus } from "@phosphor-icons/react";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "react-i18next";
 
+import useAppSettings from "../../common/hooks/useAppSettings";
 import Task from "../interfaces/Task";
 import AddTaskDialog from "./AddTaskModal";
 import TaskItem from "./TaskItem";
 
 function TodoList() {
   const { t } = useTranslation();
+  const { isSubapp } = useAppSettings();
 
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loadingTasks, setLoadingTasks] = useState(true);
   const [taskModalOpen, setTaskModalOpen] = useState(false);
+  const tasksStorageKey = useMemo(
+    () => (isSubapp ? "pomodoro-timer-v1/tasks" : "tasks"),
+    [isSubapp]
+  );
 
   const addTask = (description: string) => {
     setTasks((data) => [
@@ -45,7 +51,7 @@ function TodoList() {
   };
 
   useEffect(() => {
-    const savedTasks = localStorage.getItem("tasks");
+    const savedTasks = localStorage.getItem(tasksStorageKey);
 
     if (savedTasks) setTasks(JSON.parse(savedTasks));
 
@@ -55,7 +61,7 @@ function TodoList() {
   useEffect(() => {
     if (loadingTasks) return;
 
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem(tasksStorageKey, JSON.stringify(tasks));
   }, [loadingTasks, tasks]);
 
   return (

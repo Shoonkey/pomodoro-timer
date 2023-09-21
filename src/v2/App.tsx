@@ -2,16 +2,13 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
 import { I18nextProvider } from "react-i18next";
 
+import useAppSettings from "../common/hooks/useAppSettings";
 import Homepage from "./pages/Homepage";
 import getTheme from "./chakra/theme";
 import setupI18N from "./i18n";
 
-interface AppProps {
-  language?: string;
-  theme?: "dark" | "light";
-}
-
-function App({ theme = "dark", language = "pt-BR" }: AppProps) {
+function App() {
+  const { language, theme } = useAppSettings();
   const i18n = setupI18N(language);
 
   return (
