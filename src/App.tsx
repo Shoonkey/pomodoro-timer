@@ -34,15 +34,15 @@ function Root({
   language = "pt-BR",
 }: AppProps) {
   const { t, i18n } = useTranslation();
-  const location = useLocation();
-  const navigate = useNavigate();
+  // const location = useLocation();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    if (location.pathname === "/") {
-      navigate("/v2");
-      return;
-    }
-  }, [location]);
+  // useEffect(() => {
+  //   if (location.pathname === "/") {
+  //     navigate("/v2");
+  //     return;
+  //   }
+  // }, [location]);
 
   return (
     <ChakraProvider>
@@ -59,7 +59,7 @@ function Root({
           >
             <Flex gap={2} borderRadius="8px">
               <VisuallyHidden>{t("appSettings")}</VisuallyHidden>
-              <Select
+              {/* <Select
                 bg="gray.800"
                 w="auto"
                 aria-label={t("selectVersion")}
@@ -68,7 +68,7 @@ function Root({
               >
                 <option value="v1">v1</option>
                 <option value="v2">v2</option>
-              </Select>
+              </Select> */}
               {!isSubapp && (
                 <Select
                   w="auto"
@@ -86,7 +86,8 @@ function Root({
           </Box>
         </Flex>
         <Flex flexGrow={1}>
-          <Routes>
+          <AppV1 theme={theme} language={i18n.language} />
+          {/* <Routes>
             <Route
               path="/v1/*"
               element={<AppV1 theme={theme} language={i18n.language} />}
@@ -95,7 +96,7 @@ function Root({
               path="/v2/*"
               element={<AppV2 theme={theme} language={i18n.language} />}
             />
-          </Routes>
+          </Routes> */}
         </Flex>
       </Flex>
     </ChakraProvider>
