@@ -47,7 +47,12 @@ function Root() {
     >
       <Flex justifyContent="end" alignItems="center" p={2}>
         <Box
-          bg="linear-gradient(90deg, hsla(139, 72%, 83%, 1) 0%, hsla(229, 89%, 62%, 1) 100%);"
+          bg={
+            // TODO: When v2 comes around, leave it set as the gradient as there will always be a child element
+            isSubapp
+              ? "none"
+              : "linear-gradient(90deg, hsla(139, 72%, 83%, 1) 0%, hsla(229, 89%, 62%, 1) 100%);"
+          }
           p={1}
           borderRadius="8px"
         >
@@ -114,7 +119,9 @@ function App({
   ]);
 
   return (
-    <AppSettingsProvider settings={{ isSubapp, theme, language: i18n.language }}>
+    <AppSettingsProvider
+      settings={{ isSubapp, theme, language: i18n.language }}
+    >
       <I18nextProvider i18n={i18n}>
         <ChakraProvider>
           <RouterProvider router={router} />
