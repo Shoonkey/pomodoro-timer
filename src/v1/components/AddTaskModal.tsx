@@ -27,7 +27,7 @@ function AddTaskDialog({ isOpen, onAddTask, onClose }: AddTaskDialogProps) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl">
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent mx={4}>
         <ModalHeader>{t("pages.home.taskModal.newTask")}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
