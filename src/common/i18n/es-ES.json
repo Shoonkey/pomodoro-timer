@@ -1,3 +1,5 @@
 {
-  "selectLanguage": "Seleccionar lenguaje"
+  "selectLanguage": "Seleccionar lenguaje",
+  "selectVersion": "Seleccionar versión",
+  "appSettings": "Configuraciones del app"
 }

@@ -57,7 +57,7 @@ export default function Homepage() {
           </CustomTooltip>
         </Panel>
         <Panel
-          bg="bg.800"
+          bg="gray.800"
           as="main"
           w="50%"
           zIndex={1}

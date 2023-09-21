@@ -1,3 +1,5 @@
 {
-  "selectLanguage": "Select language"
+  "selectLanguage": "Select language",
+  "selectVersion": "Select version",
+  "appSettings": "App settings"
 }
