@@ -2,8 +2,9 @@ import {
   Box,
   ChakraProvider,
   Flex,
+  IconButton,
   Select,
-  Text,
+  Tooltip,
   VisuallyHidden,
 } from "@chakra-ui/react";
 import {
@@ -17,6 +18,7 @@ import {
 } from "react-router-dom";
 import { I18nextProvider, useTranslation } from "react-i18next";
 import { useEffect, useMemo } from "react";
+import { SunHorizon, MoonStars } from "@phosphor-icons/react";
 
 import AppSettingsProvider, {
   AppSettingsData,
@@ -28,7 +30,7 @@ import AppV2 from "./v2/App";
 
 function Root() {
   const { t, i18n } = useTranslation();
-  const { isSubapp } = useAppSettings();
+  const { isSubapp, theme, setTheme } = useAppSettings();
   // const location = useLocation();
   // const navigate = useNavigate();
 
@@ -60,6 +62,7 @@ function Root() {
             <VisuallyHidden>{t("appSettings")}</VisuallyHidden>
             {/* <Select
                 bg="gray.800"
+                color="whiteAlpha.800"
                 w="auto"
                 aria-label={t("selectVersion")}
                 value={location.pathname.startsWith("/v1") ? "v1" : "v2"}
@@ -69,17 +72,38 @@ function Root() {
                 <option value="v2">v2</option>
               </Select> */}
             {!isSubapp && (
-              <Select
-                w="auto"
-                bg="gray.800"
-                aria-label={t("selectLanguage")}
-                value={i18n.language}
-                onChange={(e) => i18n.changeLanguage(e.target.value)}
-              >
-                <option value="en-US">en-US</option>
-                <option value="pt-BR">pt-BR</option>
-                <option value="es-ES">es-ES</option>
-              </Select>
+              <>
+                <Select
+                  w="auto"
+                  bg="gray.800"
+                  color="whiteAlpha.800"
+                  aria-label={t("selectLanguage")}
+                  value={i18n.language}
+                  onChange={(e) => i18n.changeLanguage(e.target.value)}
+                >
+                  <option value="en-US">en-US</option>
+                  <option value="pt-BR">pt-BR</option>
+                  <option value="es-ES">es-ES</option>
+                </Select>
+                <Tooltip placement="left" label={t("changeTheme")}>
+                  <IconButton
+                    aria-label={t("changeTheme")}
+                    color="gray.800"
+                    bg="transparent"
+                    _hover={{ bg: "whiteAlpha.400" }}
+                    onClick={() =>
+                      setTheme(theme === "dark" ? "light" : "dark")
+                    }
+                    icon={
+                      theme === "dark" ? (
+                        <SunHorizon size={36} weight="fill" />
+                      ) : (
+                        <MoonStars size={36} weight="fill" />
+                      )
+                    }
+                  />
+                </Tooltip>
+              </>
             )}
           </Flex>
         </Box>
@@ -119,15 +143,15 @@ function App({
   ]);
 
   return (
-    <AppSettingsProvider
-      settings={{ isSubapp, theme, language: i18n.language }}
-    >
-      <I18nextProvider i18n={i18n}>
-        <ChakraProvider>
+    <I18nextProvider i18n={i18n}>
+      <ChakraProvider>
+        <AppSettingsProvider
+          settings={{ isSubapp, theme, language: i18n.language }}
+        >
           <RouterProvider router={router} />
-        </ChakraProvider>
-      </I18nextProvider>
-    </AppSettingsProvider>
+        </AppSettingsProvider>
+      </ChakraProvider>
+    </I18nextProvider>
   );
 }
 

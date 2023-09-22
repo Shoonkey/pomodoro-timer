@@ -9,20 +9,22 @@ import {
   Button,
   Flex,
   Textarea,
-} from "@chakra-ui/react"
-import { useState } from "react"
-import { useTranslation } from "react-i18next"
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import useAppSettings from "../../common/hooks/useAppSettings";
 
 interface AddTaskDialogProps {
-  isOpen: boolean
-  onAddTask: (description: string) => void
-  onClose: () => void
+  isOpen: boolean;
+  onAddTask: (description: string) => void;
+  onClose: () => void;
 }
 
 function AddTaskDialog({ isOpen, onAddTask, onClose }: AddTaskDialogProps) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+  const { theme } = useAppSettings();
 
-  const [description, setDescription] = useState("")
+  const [description, setDescription] = useState("");
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl">
@@ -41,19 +43,26 @@ function AddTaskDialog({ isOpen, onAddTask, onClose }: AddTaskDialogProps) {
         <ModalFooter gap={3}>
           <Button
             colorScheme="orange"
+            color="gray.800"
             onClick={() => {
-              onAddTask(description)
-              setDescription("")
-              onClose()
+              onAddTask(description);
+              setDescription("");
+              onClose();
             }}
           >
             {t("pages.home.taskModal.add")}
           </Button>
-          <Button onClick={onClose}>{t("pages.home.taskModal.cancel")}</Button>
+          <Button
+            colorScheme={theme === "dark" ? "whiteAlpha" : "blackAlpha"}
+            color="gray.800"
+            onClick={onClose}
+          >
+            {t("pages.home.taskModal.cancel")}
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
-  )
+  );
 }
 
-export default AddTaskDialog
+export default AddTaskDialog;

@@ -74,6 +74,7 @@ function Clock() {
       </Heading>
       <Button
         colorScheme={paused ? "orange" : "cyan"}
+        color="gray.800"
         onClick={() => setPaused(!paused)}
       >
         {paused
