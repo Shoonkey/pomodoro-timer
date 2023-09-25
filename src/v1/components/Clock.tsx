@@ -30,7 +30,7 @@ function Clock() {
     let interval: number;
 
     if (!paused)
-      interval = setInterval(() => setTimeInMS((time) => time - 1000), 1000);
+      interval = window.setInterval(() => setTimeInMS((time) => time - 1000), 1000);
 
     return () => {
       if (interval) clearInterval(interval);
