@@ -6,22 +6,11 @@ import {
   Tooltip,
   VisuallyHidden,
 } from "@chakra-ui/react";
-import {
-  Route,
-  RouterProvider,
-  Routes,
-  createBrowserRouter,
-  createHashRouter,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useEffect, useMemo } from "react";
 import { SunHorizon, MoonStars } from "@phosphor-icons/react";
 
 import useAppSettings from "../hooks/useAppSettings";
 import AppV1 from "../../v1/App";
-import AppV2 from "../../v2/App";
 
 function Root() {
   const { t, i18n } = useTranslation();

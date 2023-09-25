@@ -4,7 +4,6 @@ import useClockTime from "../../../hooks/useClockTime";
 import ClockHandle from "./ClockHandle";
 import ClockNumber from "./ClockNumber";
 import ClockCircle from "./ClockCircle";
-import ClockArc from "./ClockArc";
 
 interface ClockColors {
   outerCircle: string;
