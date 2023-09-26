@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Flex, Text, ScaleFade } from "@chakra-ui/react";
+import { Box, Button, Heading, Flex, Text, ScaleFade, useBreakpointValue } from "@chakra-ui/react";
 import { Armchair, Campfire } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,6 +10,7 @@ const INTERVALS = {
 
 function Clock() {
   const { t } = useTranslation();
+  const iconSize = useBreakpointValue({ base: 32, md: 64 }) || 32;
 
   const [timeInMS, setTimeInMS] = useState(INTERVALS.WORK);
   const [paused, setPaused] = useState(true);
@@ -52,23 +53,23 @@ function Clock() {
     >
       <Box position="relative">
         <ScaleFade in={inPomodoroPause}>
-          <Text fontSize={24} fontStyle="italic" position="absolute">
+          <Text fontSize={{ base: 18, md: 24 }} fontStyle="italic" position="absolute">
             <Flex as="span" alignItems="center" gap={2}>
-              <Armchair color="pink" size={64} />
+              <Armchair color="pink" size={iconSize} />
               {t("pages.home.timer.chillTime")}
             </Flex>
           </Text>
         </ScaleFade>
         <ScaleFade in={!inPomodoroPause}>
-          <Text fontSize={24} fontStyle="italic">
+          <Text fontSize={{ base: 18, md: 24 }} fontStyle="italic">
             <Flex as="span" alignItems="center" gap={2}>
-              <Campfire color="orange" size={64} />
+              <Campfire color="orange" size={iconSize} />
               {t("pages.home.timer.workTime")}
             </Flex>
           </Text>
         </ScaleFade>
       </Box>
-      <Heading fontSize="9xl">
+      <Heading fontSize={{ base: "7xl", lg: "9xl" }}>
         {minute < 10 ? "0" + minute : minute}:
         {second < 10 ? "0" + second : second}
       </Heading>

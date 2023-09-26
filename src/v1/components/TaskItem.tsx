@@ -26,8 +26,9 @@ function TaskItem({ task, onSetComplete, onClickDelete }: TaskProps) {
       borderWidth="1px"
     >
       <Text
-        fontSize="1.25rem"
+        fontSize={{ base: "1rem", md: "1.25rem" }}
         textDecor={task.completed ? "line-through" : "none"}
+        pr={2}
         flexGrow={1}
         wordBreak="break-word"
       >
