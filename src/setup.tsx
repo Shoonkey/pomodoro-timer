@@ -1,5 +1,5 @@
 import React from "react";
-import { Root, createRoot } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 
 import App from "./App";
 
@@ -10,17 +10,16 @@ interface AppSetupProps {
   theme?: "dark" | "light";
 }
 
-let root: Root;
-
 function setupApp({ containerId, isSubapp = false, language, theme }: AppSetupProps) {
-  if (!root)
-    root = createRoot(document.getElementById(containerId)!);
+  const root = createRoot(document.getElementById(containerId)!);
   
   root.render(
     <React.StrictMode>
       <App isSubapp={isSubapp} language={language} theme={theme} />
     </React.StrictMode>
   );
+
+  return root;
 }
 
 export default setupApp;
