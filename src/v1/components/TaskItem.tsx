@@ -1,9 +1,14 @@
-import { Flex, Tooltip, IconButton, Text } from "@chakra-ui/react";
+import {
+  Flex,
+  Tooltip,
+  IconButton,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import { CheckCircle, TrashSimple } from "@phosphor-icons/react";
 import { useTranslation } from "react-i18next";
 
 import Task from "../interfaces/Task";
-import useAppSettings from "../../common/hooks/useAppSettings";
 
 interface TaskProps {
   task: Task;
@@ -13,7 +18,7 @@ interface TaskProps {
 
 function TaskItem({ task, onSetComplete, onClickDelete }: TaskProps) {
   const { t } = useTranslation();
-  const { theme } = useAppSettings();
+  const { colorMode: theme } = useColorMode();
 
   return (
     <Flex
@@ -47,10 +52,7 @@ function TaskItem({ task, onSetComplete, onClickDelete }: TaskProps) {
           )}
           color="orange.500"
           icon={
-            <CheckCircle
-              size={32}
-              weight={task.completed ? "fill" : "thin"}
-            />
+            <CheckCircle size={32} weight={task.completed ? "fill" : "thin"} />
           }
           variant="transparent"
         />

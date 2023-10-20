@@ -5,6 +5,7 @@ import {
   Select,
   Tooltip,
   VisuallyHidden,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { SunHorizon, MoonStars } from "@phosphor-icons/react";
@@ -13,8 +14,10 @@ import useAppSettings from "../hooks/useAppSettings";
 import AppV1 from "../../v1/App";
 
 function Root() {
+  const { isSubapp } = useAppSettings();
+
   const { t, i18n } = useTranslation();
-  const { isSubapp, theme, setTheme } = useAppSettings();
+  const { colorMode: theme, setColorMode: setTheme } = useColorMode();
   // const location = useLocation();
   // const navigate = useNavigate();
 
@@ -93,15 +96,15 @@ function Root() {
         </Box>
       </Flex>
       <Flex flexGrow={1}>
-        <AppV1 />
+        <AppV1 language={i18n.language} />
         {/* <Routes>
             <Route
               path="/v1/*"
-              element={<AppV1 />}
+              element={<AppV1 language={i18n.language} />}
             />
             <Route
               path="/v2/*"
-              element={<AppV2 />}
+              element={<AppV2 language={i18n.language} />>}
             />
           </Routes> */}
       </Flex>

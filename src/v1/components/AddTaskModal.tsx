@@ -9,10 +9,10 @@ import {
   Button,
   Flex,
   Textarea,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import useAppSettings from "../../common/hooks/useAppSettings";
 
 interface AddTaskDialogProps {
   isOpen: boolean;
@@ -22,7 +22,7 @@ interface AddTaskDialogProps {
 
 function AddTaskDialog({ isOpen, onAddTask, onClose }: AddTaskDialogProps) {
   const { t } = useTranslation();
-  const { theme } = useAppSettings();
+  const { colorMode: theme } = useColorMode();
 
   const [description, setDescription] = useState("");
 
